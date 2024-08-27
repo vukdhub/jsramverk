@@ -8,10 +8,19 @@ async function openDb() {
         dbFilename = "./db/test.sqlite";
     }
 
-    return await open({
+    const db = await open({
         filename: dbFilename,
         driver: sqlite3.Database
     });
+
+    // Execute the SQL command to create the table if it doesn't exist
+    await db.exec(`CREATE TABLE IF NOT EXISTS documents (
+        title TEXT,
+        content TEXT,
+        created_at DATE DEFAULT (datetime('now','localtime'))
+    )`);
+
+    return db;
 }
 
 

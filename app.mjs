@@ -34,10 +34,7 @@ app.post("/", async (req, res) => {
 });
 
 app.get('/:id', async (req, res) => {
-    return res.render(
-        "doc",
-        { doc: await documents.getOne(req.params.id) }
-    );
+    return res.render("doc", { doc: await documents.getOne(req.params.id) });
 });
 
 app.get('/', async (req, res) => {
